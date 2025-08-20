@@ -6,7 +6,7 @@ Website ini menyediakan **dashboard pembayaran manual** (DANA, Gopay, OVO, QRIS)
 
 ## 📂 Struktur Folder
 
-```javascript
+```JSON
 ├── index.html # Dashboard utama
 ├── donate/
 │ └── index.html # Halaman Payment Gateway Otomatis
