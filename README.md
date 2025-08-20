@@ -6,7 +6,7 @@ Website ini menyediakan **dashboard pembayaran manual** (DANA, Gopay, OVO, QRIS)
 
 ## 📂 Struktur Folder
 
-```JSON
+```javascript
 ├── index.html # Dashboard utama
 ├── donate/
 │ └── index.html # Halaman Payment Gateway Otomatis
@@ -78,8 +78,7 @@ Salin kode
 GET https://api.nvidiabotz.xyz/orderkuota/mutasiqr?username=USERNAME&token=TOKEN
 Contoh respon:
 
-json
-Salin kode
+```json
 {
   "creator": "FR3HOSTING",
   "status": true,
@@ -97,7 +96,7 @@ Salin kode
     }
   ]
 }
-Sistem akan polling setiap 1 detik sampai status transaksi terdeteksi masuk.
+```
 
 ☕ Dukung Developer
 Kalau project ini bermanfaat, kamu bisa traktir kopi agar development terus jalan 🚀
