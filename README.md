@@ -5,22 +5,23 @@ Website ini menyediakan **dashboard pembayaran manual** (DANA, Gopay, OVO, QRIS)
 ---
 
 ## 📂 Struktur Folder
-
-```javascript
-├── index.html # Dashboard utama
+```
+.
+├── index.html                 # Dashboard utama
 ├── donate/
-│ └── index.html # Halaman Payment Gateway Otomatis
+│   └── index.html             # Halaman Payment Gateway Otomatis
 ├── assets/
-│ ├── css/
-│ │ └── style.css # Style utama (tema neon dark classic)
-│ ├── img/
-│ │ └── qris.png # QRIS statis
-│ └── js/
-│ ├── settings.js # Konfigurasi bot Telegram & API
-│ └── main.js # Script utama (toggle, zoom, download, payment)
+│   ├── css/
+│   │   └── style.css          # Style utama (tema neon dark classic)
+│   ├── img/
+│   │   └── qris.png           # QRIS statis
+│   └── js/
+│       ├── settings.js        # Konfigurasi bot Telegram & API
+│       └── main.js            # Script utama (toggle, zoom, download, payment)
 ├── README.md
 └── LICENSE
 ```
+
 ---
 
 ## 🚀 Fitur
@@ -38,21 +39,28 @@ Website ini menyediakan **dashboard pembayaran manual** (DANA, Gopay, OVO, QRIS)
 
 ---
 
-> [!CAUTION]
 ## ⚙️ Konfigurasi
-1. Buka `assets/js/settings.js`
+1. Buka file `assets/js/settings.js`
 2. Isi variabel berikut:
    ```javascript
    export const TELEGRAM_BOT_TOKEN = "ISI_TOKEN_BOTMU";
    export const TELEGRAM_CHAT_ID   = "ISI_ID_OWNERMU";
-Simpan dan jalankan website.
+   ```
+3. Simpan, lalu jalankan website di browser.
 
-🔌 API yang Digunakan
-Payment gateway otomatis ini menggunakan API dari nvidiabotz.xyz.
+---
 
-1️⃣ Create Payment
+## 🔌 API yang Digunakan
+
+Payment gateway otomatis ini menggunakan **API dari nvidiabotz.xyz**.
+
+### 1️⃣ Create Payment
 Digunakan untuk membuat transaksi baru.
+```
+POST https://api.nvidiabotz.xyz/orderkuota/createpayment?amount={NOMINAL}&codeqr={DATA_QRIS}
+```
 
+**Contoh respon:**
 ```json
 {
   "creator": "FR3HOSTING",
@@ -68,6 +76,17 @@ Digunakan untuk membuat transaksi baru.
 }
 ```
 
+> ⚠️ Catatan: `expired` hanya berlaku **5 menit**.
+
+---
+
+### 2️⃣ Cek Mutasi (Status Transaksi)
+Digunakan untuk mengecek apakah transfer QRIS sudah masuk.
+```
+GET https://api.nvidiabotz.xyz/orderkuota/mutasiqr?username=USERNAME&token=TOKEN
+```
+
+**Contoh respon:**
 ```json
 {
   "creator": "FR3HOSTING",
@@ -88,8 +107,20 @@ Digunakan untuk membuat transaksi baru.
 }
 ```
 
-☕ Dukung Developer
-Kalau project ini bermanfaat, kamu bisa traktir kopi agar development terus jalan 🚀
+Sistem akan **polling setiap 1 detik** sampai status transaksi terdeteksi masuk.
 
-🔗 Scan QRIS Berikut:
-<p align="center"> <img src="assets/img/qris.png" alt="QRIS Beli Kopi" width="250"/> </p>
+---
+
+## ☕ Dukung Developer
+
+Kalau project ini bermanfaat, kamu bisa traktir kopi agar development terus jalan 🚀  
+
+### 🔗 Scan QRIS Berikut:
+<p align="center">
+  <img src="assets/img/QRIS.png" alt="QRIS Beli Kopi" width="250"/>
+</p>
+
+---
+
+## 📜 Lisensi
+Proyek ini menggunakan lisensi **MIT** (lihat file LICENSE).
