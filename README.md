@@ -5,7 +5,8 @@ Website ini menyediakan **dashboard pembayaran manual** (DANA, Gopay, OVO, QRIS)
 ---
 
 ## 📂 Struktur Folder
-.
+
+```javascript
 ├── index.html # Dashboard utama
 ├── donate/
 │ └── index.html # Halaman Payment Gateway Otomatis
@@ -19,10 +20,7 @@ Website ini menyediakan **dashboard pembayaran manual** (DANA, Gopay, OVO, QRIS)
 │ └── main.js # Script utama (toggle, zoom, download, payment)
 ├── README.md
 └── LICENSE
-
-yaml
-Salin kode
-
+```
 ---
 
 ## 🚀 Fitur
@@ -54,8 +52,6 @@ Payment gateway otomatis ini menggunakan API dari nvidiabotz.xyz.
 1️⃣ Create Payment
 Digunakan untuk membuat transaksi baru.
 
-arduino
-Salin kode
 POST https://api.nvidiabotz.xyz/orderkuota/createpayment?amount={NOMINAL}&codeqr={DATA_QRIS}
 Contoh respon:
 
