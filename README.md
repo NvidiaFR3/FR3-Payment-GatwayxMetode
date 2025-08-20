@@ -38,6 +38,7 @@ Website ini menyediakan **dashboard pembayaran manual** (DANA, Gopay, OVO, QRIS)
 
 ---
 
+> [!CAUTION]
 ## ⚙️ Konfigurasi
 1. Buka `assets/js/settings.js`
 2. Isi variabel berikut:
@@ -52,10 +53,7 @@ Payment gateway otomatis ini menggunakan API dari nvidiabotz.xyz.
 1️⃣ Create Payment
 Digunakan untuk membuat transaksi baru.
 
-POST https://api.nvidiabotz.xyz/orderkuota/createpayment?amount={NOMINAL}&codeqr={DATA_QRIS}
-Contoh respon:
-
-json
+```json
 {
   "creator": "FR3HOSTING",
   "status": true,
@@ -68,15 +66,7 @@ json
     }
   }
 }
-⚠️ Catatan: expired hanya berlaku 5 menit.
-
-2️⃣ Cek Mutasi (Status Transaksi)
-Digunakan untuk mengecek apakah transfer QRIS sudah masuk.
-
-nginx
-Salin kode
-GET https://api.nvidiabotz.xyz/orderkuota/mutasiqr?username=USERNAME&token=TOKEN
-Contoh respon:
+```
 
 ```json
 {
