@@ -7,17 +7,17 @@ Website ini menyediakan **dashboard pembayaran manual** (DANA, Gopay, OVO, QRIS)
 ## Struktur Folder
 ```
 .
-├── index.html                 # Dashboard utama
+├── index.html
 ├── donate/
-│   └── index.html             # Halaman Payment Gateway Otomatis
+│   └── index.html
 ├── assets/
 │   ├── css/
-│   │   └── style.css          # Style utama (tema neon dark classic)
+│   │   └── style.css
 │   ├── img/
-│   │   └── qris.png           # QRIS statis
+│   │   └── qris.png
 │   └── js/
-│       ├── settings.js        # Konfigurasi bot Telegram & API
-│       └── main.js            # Script utama (toggle, zoom, download, payment)
+│       ├── settings.js
+│       └── main.js
 ├── README.md
 └── LICENSE
 ```
@@ -118,4 +118,4 @@ Sistem akan polling setiap 1 detik sampai status transaksi terdeteksi masuk.
 
 ## Dukung Developer
 Jika project ini bermanfaat, kamu bisa mendukung agar development terus berjalan.  
-Scan QRIS pada folder `assets/img/QRIS.png`
+Scan QRIS pada folder `assets/img/qris.png`.
