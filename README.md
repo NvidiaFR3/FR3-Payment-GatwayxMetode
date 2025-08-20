@@ -119,7 +119,7 @@ Sistem akan polling setiap 1 detik sampai status transaksi terdeteksi masuk.
 ## Dukung Developer
 Jika project ini bermanfaat, kamu bisa mendukung agar development terus berjalan.  
 
-# BUAT BELI KOPI🗿
+#### BUAT BELI KOPI🗿
 
 <p align="center">
   <img src="assets/img/QRIS.png" alt="QRIS Beli Kopi" width="250"/>
