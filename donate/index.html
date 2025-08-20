@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Gateway</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="header">
+    <h1 class="title">🚀 Payment Gateway</h1>
+  </header>
+
+  <main class="container">
+    <form id="paymentForm" class="grid" style="gap:12px;">
+      <label>Nomor User</label>
+      <input type="text" name="user" required>
+
+      <label>Nominal Transfer</label>
+      <input type="number" name="amount" required>
+
+      <label>Metode Transfer</label>
+      <select name="method" required>
+        <option value="dana">DANA</option>
+        <option value="gopay">GOPAY</option>
+        <option value="ovo">OVO</option>
+        <option value="shopeepay">ShopeePay</option>
+        <option value="lainnya">Lainnya</option>
+      </select>
+
+      <button type="submit" class="btn primary">Buat Pembayaran</button>
+    </form>
+
+    <div id="paymentResult" style="margin-top:20px;text-align:center;"></div>
+  </main>
+
+  <script type="module">
+    import {
+      TELEGRAM_BOT_TOKEN,
+      TELEGRAM_CHAT_ID,
+      API_CREATE_PAYMENT_BASE,
+      API_MUTASI_URL,
+      CHECK_INTERVAL_MS
+    } from "../assets/js/settings.js";
+
+    const form = document.getElementById("paymentForm");
+    const resultBox = document.getElementById("paymentResult");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const user = data.get("user");
+      const amount = data.get("amount");
+      const method = data.get("method");
+
+      resultBox.innerHTML = "⏳ Membuat pembayaran...";
+
+      const res = await fetch(`${API_CREATE_PAYMENT_BASE}?amount=${amount}`);
+      const json = await res.json();
+
+      if (json.status) {
+        const trx = json.result;
+        resultBox.innerHTML = `
+          <h3>ID Transaksi: ${trx.idtransaksi}</h3>
+          <p>Jumlah: Rp ${trx.jumlah}</p>
+          <p>Expired: ${new Date(trx.expired).toLocaleTimeString()}</p>
+          <img src="${trx.imageqris.url}" width="200">
+        `;
+
+        const interval = setInterval(async () => {
+          const cek = await fetch(API_MUTASI_URL);
+          const cekJson = await cek.json();
+          if (cekJson.status) {
+            const findPay = cekJson.result.find(r => r.kredit.replace(/\\./g, \"\") == trx.jumlah);
+            if (findPay) {
+              clearInterval(interval);
+
+              const message = `✅ Pembayaran Baru\\nNomor User: ${user}\\nNominal TRX: Rp ${trx.jumlah}\\nId Transaksi: ${trx.idtransaksi}\\nMetode: ${method}`;
+              await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  chat_id: TELEGRAM_CHAT_ID,
+                  text: message
+                })
+              });
+
+              alert("✅ Pembayaran diterima!");
+              window.location.href = "../index.html";
+            }
+          }
+        }, CHECK_INTERVAL_MS);
+      } else {
+        resultBox.innerHTML = "❌ Gagal membuat pembayaran!";
+      }
+    });
+  </script>
+</body>
+</html>
