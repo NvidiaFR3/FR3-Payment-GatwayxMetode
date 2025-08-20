@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Payment</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://kit.fontawesome.com/a2d9d5a64a.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <h1 class="title">💳 Dashboard Payment</h1>
+    <p class="subtitle">Pilih metode pembayaran</p>
+  </header>
+
+  <main class="container">
+    <div class="grid cards">
+      <div class="card" onclick="toggleInfo('dana-info')">
+        <h3><i class="fa-brands fa-paypal icon"></i>DANA</h3>
+        <p class="muted">Klik untuk lihat nomor</p>
+        <div id="dana-info" class="reveal">
+          <p>No. Dana: <b>08812948247</b></p>
+        </div>
+      </div>
+
+      <div class="card" onclick="toggleInfo('gopay-info')">
+        <h3><i class="fa-brands fa-google-pay icon"></i>GOPAY</h3>
+        <p class="muted">Klik untuk lihat nomor</p>
+        <div id="gopay-info" class="reveal">
+          <p>No. Gopay: <b>088229545275</b></p>
+        </div>
+      </div>
+
+      <div class="card" onclick="toggleInfo('ovo-info')">
+        <h3><i class="fa-solid fa-wallet icon"></i>OVO</h3>
+        <p class="muted">Klik untuk lihat status</p>
+        <div id="ovo-info" class="reveal">
+          <p>Tidak Tersedia</p>
+        </div>
+      </div>
+
+      <!-- QRIS -->
+      <div class="card" onclick="toggleInfo('qris-info')">
+        <h3><i class="fa-solid fa-qrcode icon"></i>QRIS</h3>
+        <p class="muted">Klik untuk lihat QR</p>
+        <div id="qris-info" class="reveal">
+          <img src="assets/img/qris.png" alt="QRIS" width="200" onclick="zoomQR(this)">
+          <br>
+          <button class="btn" onclick="downloadQR()">Download QR</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:30px;text-align:center;">
+      <a href="donate/index.html" class="btn primary">🔗 Payment Gateway Otomatis</a>
+    </div>
+  </main>
+
+  <script type="module" src="assets/js/main.js"></script>
+</body>
+</html>
